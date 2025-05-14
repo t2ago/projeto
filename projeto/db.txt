@@ -1,0 +1,28 @@
+CREATE DATABASE Clinica;
+USE Clinica;
+
+CREATE TABLE Paciente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome CHAR(100) NOT NULL,
+    cpf CHAR(14) UNIQUE NOT NULL,
+    telefone CHAR(15)
+);
+
+CREATE TABLE Medico (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome CHAR(100) NOT NULL,
+    especialidade CHAR(100),
+    crm CHAR(20) UNIQUE NOT NULL
+);
+
+CREATE TABLE Consulta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_paciente INT NOT NULL,
+    id_medico INT NOT NULL,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
+    observacao TEXT,
+
+    FOREIGN KEY (id_paciente) REFERENCES Paciente(id),
+    FOREIGN KEY (id_medico) REFERENCES Medico(id)
+);
